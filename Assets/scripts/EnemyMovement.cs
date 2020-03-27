@@ -6,14 +6,15 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent nav;
-    [SerializeField] private Transform player;
+    [SerializeField] private Transform target;
+    public float speed;
 
     private Vector3 playerPos;
     // Start is called before the first frame update
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        player = GameObject.Find("Hero").transform;
+        target = GameObject.Find("Hero").transform;
     }
 
     // Update is called once per frame
@@ -24,12 +25,13 @@ public class EnemyMovement : MonoBehaviour
         {
             nav.enabled = true;
             //enemy find the player
-            nav.SetDestination(player.position);
+            nav.SetDestination(target.position);
         }
         else
         {
             nav.enabled = false;
         }
+        //transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
     }
 }
